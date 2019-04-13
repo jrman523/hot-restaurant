@@ -19,10 +19,14 @@ var tables = [
       ID: "ID#"
     }];
 
-    app.get("/", function(req, res) {
+     app.get("/", function(req, res) {
         res.sendFile(path.join(__dirname, "home.html"));
       });
       
+     app.get("/reservation", function(req, res) {
+        res.sendFile(path.join(__dirname, "reservation.html"));
+      });
+
       app.get("/addTable", function(req, res) {
         res.sendFile(path.join(__dirname, "addTable.html"));
       });
