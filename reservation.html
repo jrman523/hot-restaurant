@@ -3,7 +3,7 @@
 <head>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://code.jquery.com/jquery.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script src="server.js"></script>
@@ -14,70 +14,94 @@
 
 <body>
 
-	<div class="container">
+    <div class="container">
 
-		<div class="jumbotron">
-			<h1 class="text-center"><span class="glyphicon glyphicon-fire"></span><i class="fas fa-fire"></i>    Hot Restaurant</h1>
-			<hr>
-			<h2 class="text-center">Make your reservation</h2>
-			<br>
+        <div class="jumbotron">
+            <h1 class="text-center"><span class="glyphicon glyphicon-fire"></span><i class="fas fa-fire"></i> Hot
+                Restaurant</h1>
+            <hr>
+            <h2 class="text-center">Make your reservation</h2>
+            <br>
 
-			<div class="text-center">
-                <a class="btn btn-primary btn-lg" href="/viewTables" role="button"><i class="fas fa-list-alt"></i> View Tables</a>
+            <div class="text-center">
+                <a class="btn btn-primary btn-lg" href="/viewTables" role="button"><i class="fas fa-list-alt"></i> View
+                    Tables</a>
                 <a class="btn btn-secondary btn-lg" href="/" role="button"><i class="fas fa-home"></i></a>
-			</div>
-		</div>
+            </div>
+        </div>
 
-		<div class="row">
-			<div class="col-lg-12">
+        <div class="row">
+            <div class="col-lg-12">
 
-				<!-- Reservation Page -->
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<h4 class="panel-title">Table Reservation</h4>
-					</div>
-					<div class="panel-body">
+                <!-- Reservation Page -->
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">Table Reservation</h4>
+                    </div>
+                    <div class="panel-body">
 
-						<form role="form">
+                        <form role="form">
 
-							<div class="form-group">
-								<label for="">Name</label>
-								<input type="text" class="form-control" id="reserve_name">
-							</div>
+                            <div class="form-group">
+                                <label for="">Name</label>
+                                <input type="text" class="form-control" id="reserve_name">
+                            </div>
 
-							<div class="form-group">
-								<label for="">Phone Number</label>
-								<input type="text" class="form-control" id="reserve_phone">
-							</div>
+                            <div class="form-group">
+                                <label for="">Phone Number</label>
+                                <input type="text" class="form-control" id="reserve_phone">
+                            </div>
 
-							<div class="form-group">
-								<label for="">Email</label>
-								<input type="text" class="form-control" id="reserve_email">
-							</div>
+                            <div class="form-group">
+                                <label for="">Email</label>
+                                <input type="text" class="form-control" id="reserve_email">
+                            </div>
 
-							<div class="form-group">
-								<label for="">Unique ID</label>
-								<input type="text" class="form-control" id="reserve_uniqueID">
-							</div>
+                            <div class="form-group">
+                                <label for="">Unique ID</label>
+                                <input type="text" class="form-control" id="reserve_uniqueID">
+                            </div>
 
-							<button type="submit" class="btn btn-primary submit">Submit</button>
-						</form>
+                            <button type="submit" class="btn btn-primary submit">Submit</button>
+                        </form>
 
-					</div>
-				</div>
+                    </div>
+                </div>
 
-			</div>
-		</div>
+            </div>
+        </div>
 
 
-	    <footer class="footer">
-	      <div class="container">
-	        <p><a href="/api/tables">API Table Link</a> | <a href="/api/waitlist">API Wait List</a> </p>
-	      </div>
-	    </footer>
+        <footer class="footer">
+            <div class="container">
+                <p><a href="/api/tables">API Table Link</a> | <a href="/api/waitlist">API Wait List</a> </p>
+            </div>
+        </footer>
 
-	</div>
+    </div>
 
+
+    <script>
+        $('.submit').on('click', function (e) {
+            e.preventDefault();
+            var id = $('#reserve_uniqueID').val().trim();
+            var newSubmission = {
+                routeName: id.toLowerCase(),
+                name: $('#reserve_name').val().trim(),
+                phone: $('#reserve_phone').val().trim(),
+                email: $('#reserve_email').val().trim(),
+                id: id.toUpperCase()
+            };
+            var url = '/api/tables';
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: newSubmission,
+                success: function (data) { alert("added your reservation"); },
+            });
+        });
+
+    </script>
 
 </html>
 </body>
