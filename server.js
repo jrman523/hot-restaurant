@@ -35,8 +35,8 @@ app.get("/reservation", function (req, res) {
   res.sendFile(path.join(__dirname, "reservation.html"));
 });
 
-app.get("/addTable", function (req, res) {
-  res.sendFile(path.join(__dirname, "addTable.html"));
+app.get("/viewTables", function (req, res) {
+  res.sendFile(path.join(__dirname, "viewTables.html"));
 });
 
 // Displays all tables
