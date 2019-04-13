@@ -67,7 +67,7 @@ app.post("/api/tables", function(req, res) {
 
   // Using a RegEx Pattern to remove spaces from newtable
   // You can read more about RegEx Patterns later https://www.regexbuddy.com/regex.html
-  newtable.routeName = newtable.name.replace(/\s+/g, "").toLowerCase();
+  newtable.routeName = newtable.routeName.replace(/\s+/g, "").toLowerCase();
 
   console.log(newtable);
 
