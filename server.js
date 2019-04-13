@@ -28,7 +28,7 @@ var tables = [
 ];
 
     app.get("/", function(req, res) {
-        res.sendFile(path.join(__dirname, "home.html"));
+        res.sendFile(path.join(__dirname, "index.html"));
       });
 
       app.get("/reservation", function(req, res) {
@@ -46,7 +46,7 @@ var tables = [
     
       // Displays a single character, or returns false
       app.get("/api/tables/:table", function(req, res) {
-        var chosen = req.params.tables;
+        var chosen = req.params.table;
       
         console.log(chosen);
       
