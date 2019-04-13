@@ -92,13 +92,18 @@
                 email: $('#reserve_email').val().trim(),
                 id: id.toUpperCase()
             };
-            var url = '/api/tables';
-            $.ajax({
-                type: "POST",
-                url: url,
-                data: newSubmission,
-                success: function (data) { alert("added your reservation"); },
-            });
+            if (id !== "" && newSubmission.name !== "" && newSubmission.phone !== "" && newSubmission.email !== "") {
+                var url = '/api/tables';
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: newSubmission,
+                    success: function (data) { alert("added your reservation"); },
+                });
+            }else {
+                alert ('all fields required');
+            }
+
         });
 
     </script>
