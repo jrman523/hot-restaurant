@@ -39,7 +39,7 @@ var tables = [
         res.sendFile(path.join(__dirname, "addTable.html"));
       });
       
-      // Displays all characters
+      // Displays all tables
       app.get("/api/tables", function(req, res) {
         return res.json(tables);
       });
@@ -59,9 +59,22 @@ var tables = [
         return res.json(false);
       });
       
+// Create New tables - takes in JSON input
+app.post("/api/tables", function(req, res) {
+  // req.body hosts is equal to the JSON post sent from the user
+  // This works because of our body parsing middleware
+  var newtable = req.body;
 
+  // Using a RegEx Pattern to remove spaces from newtable
+  // You can read more about RegEx Patterns later https://www.regexbuddy.com/regex.html
+  newtable.routeName = newtable.name.replace(/\s+/g, "").toLowerCase();
 
+  console.log(newtable);
 
+  tables.push(newtable);
+
+  res.json(newtable);
+});
 
 
 app.listen(PORT, function() {
