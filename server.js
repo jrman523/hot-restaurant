@@ -11,62 +11,58 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 var tables = [
-    {
-      routeName: "table1",
-      name: "NAME1",
-      phone: "PHONE1",
-      email: "EMAIL.COM1",
-      ID: "ID#1"
-    }, {
+  {
+    routeName: "table1",
+    name: "NAME1",
+    phone: "PHONE1",
+    email: "EMAIL.COM1",
+    ID: "ID#1"
+  }, {
     routeName: "john",
     name: "john smith",
     phone: "647373273",
     email: "test@email.com",
     ID: "JOHN"
 
-    }
+  }
 ];
 
-    app.get("/", function(req, res) {
-        res.sendFile(path.join(__dirname, "index.html"));
-      });
+app.get("/", function (req, res) {
+  res.sendFile(path.join(__dirname, "index.html"));
+});
 
-      app.get("/reservation", function(req, res) {
-        res.sendFile(path.join(__dirname, "reservation.html"));
-      });
-      
-      app.get("/addTable", function(req, res) {
-        res.sendFile(path.join(__dirname, "addTable.html"));
-      });
-      
-      // Displays all tables
-      app.get("/api/tables", function(req, res) {
-        return res.json(tables);
-      });
-    
-      // Displays a single character, or returns false
-      app.get("/api/tables/:table", function(req, res) {
-        var chosen = req.params.table;
-      
-        console.log(chosen);
-      
-        for (var i = 0; i < tables.length; i++) {
-          if (chosen === tables[i].routeName) {
-            return res.json(tables[i]);
-          }
-        }
-      
-        return res.json(false);
-      });
-      
+app.get("/reservation", function (req, res) {
+  res.sendFile(path.join(__dirname, "reservation.html"));
+});
+
+app.get("/addTable", function (req, res) {
+  res.sendFile(path.join(__dirname, "addTable.html"));
+});
+
+// Displays all tables
+app.get("/api/tables", function (req, res) {
+  return res.json(tables);
+});
+
+// Displays a single character, or returns false
+app.get("/api/tables/:table", function (req, res) {
+  var chosen = req.params.table;
+
+  console.log(chosen);
+
+  for (var i = 0; i < tables.length; i++) {
+    if (chosen === tables[i].routeName) {
+      return res.json(tables[i]);
+    }
+  }
+
+  return res.json(false);
+});
+
 // Create New tables - takes in JSON input
-app.post("/api/tables", function(req, res) {
-  // req.body hosts is equal to the JSON post sent from the user
-  // This works because of our body parsing middleware
+app.post("/api/tables", function (req, res) {
   var newtable = req.body;
 
-  // Using a RegEx Pattern to remove spaces from newtable
-  // You can read more about RegEx Patterns later https://www.regexbuddy.com/regex.html
   newtable.routeName = newtable.routeName.replace(/\s+/g, "").toLowerCase();
 
   console.log(newtable);
@@ -77,7 +73,7 @@ app.post("/api/tables", function(req, res) {
 });
 
 
-app.listen(PORT, function() {
-    console.log("App listening on PORT " + PORT);
-  });
-  
+app.listen(PORT, function () {
+  console.log("App listening on PORT " + PORT);
+});
+
