@@ -12,21 +12,29 @@ app.use(express.json());
 
 var tables = [
     {
-      routeName: "",
-      name: "NAME",
-      phone: "PHONE",
-      email: "EMAIL.COM",
-      ID: "ID#"
-    }];
+      routeName: "table1",
+      name: "NAME1",
+      phone: "PHONE1",
+      email: "EMAIL.COM1",
+      ID: "ID#1"
+    }, {
+    routeName: "john",
+    name: "john smith",
+    phone: "647373273",
+    email: "test@email.com",
+    ID: "JOHN"
 
-     app.get("/", function(req, res) {
+    }
+];
+
+    app.get("/", function(req, res) {
         res.sendFile(path.join(__dirname, "home.html"));
       });
-      
-     app.get("/reservation", function(req, res) {
+
+      app.get("/reservation", function(req, res) {
         res.sendFile(path.join(__dirname, "reservation.html"));
       });
-
+      
       app.get("/addTable", function(req, res) {
         res.sendFile(path.join(__dirname, "addTable.html"));
       });
@@ -35,7 +43,7 @@ var tables = [
       app.get("/api/tables", function(req, res) {
         return res.json(tables);
       });
-      
+    
       // Displays a single character, or returns false
       app.get("/api/tables/:table", function(req, res) {
         var chosen = req.params.tables;
